@@ -1,0 +1,177 @@
+
+/*==================Default Layout=======================*/
+body{
+	background: #43a286;  
+}
+
+#all{
+
+
+}
+
+
+#header{
+	display: block;
+	min-height: 22px;
+	background: #EBEBEB;
+	width: 100%;	
+}
+
+#headerC{
+	width: 96%;
+	margin: auto;
+}
+
+#nav{
+	width: 100%;
+	min-height: 22px;
+	background: #fff;
+	display: block;
+	overflow: hidden;	
+}
+
+#navC{
+	width: 960px;
+	margin: auto;
+}
+
+
+#main{
+	display: block;
+	min-height: 444px;
+}
+
+#mainC{
+    width: 100%;
+    margin: auto;
+}
+
+#content{
+	float: left;
+	width: 80%; 
+        margin-left: 20%;
+        
+}
+
+#contentC{		
+	padding: 22px 44px;
+	min-height: 555px;
+        background-color: #fefefe;
+        margin: 0;
+        border: 1px solid #ffffff;
+        outline: 1px solid #d1d4d1;
+        min-height: 777px;
+}
+
+#asideLeft, #asideRight{
+	width: 20%;
+	float: left;	
+	min-height: 444px;
+        position: fixed;
+        top: 0;
+        left: 0;
+}
+
+#asideC{
+    margin-left: 22px;
+}
+
+
+
+
+#footer{
+	display: block;
+	min-height: 99px;
+	background: #C0C0C0;
+	clear: both;
+}
+
+#footerC{	
+	width: 960px;
+	margin: auto;
+}
+
+
+.container{
+	width: 960px;
+	margin: auto;
+}
+
+
+/*====================Responsive====================================*/
+	@media screen and (max-width: 777px) {
+	
+	#all{
+		width: 100%;
+		min-width: 33px;  	
+
+	}
+
+	.container{	
+		width: 95%;
+		margin: auto;		
+	}
+
+
+
+	#header{
+		width: 100%; 	
+		position: relative;		
+	}
+
+
+	#headerC{
+		width: 95%;
+		margin: auto;				
+	}
+
+	
+	#main{
+	 	width: 100%;
+	 	display: block;
+	 	overflow: hidden;
+	 	margin-top: 0;
+	}
+
+	#mainC{
+		margin-top: 0;
+	}
+
+
+
+	#content{
+		
+	}
+
+
+
+	.contentContainer{			
+		width: 95%;
+		margin: auto;
+		border: none;
+	}
+
+
+	#footer{
+		clear: both;
+		width: 100%;
+
+	}
+
+	#footerC{
+		width: 95%;
+		margin: auto;
+	}
+
+	.c1, .c2, .c3, .c4, .c5, .c6, .c7, .c8, .c9, .c10, .c11, .c12, .fleft, .fright{
+		width: 100%;
+		float: none;
+		display: block;
+	}
+
+}
+
+/*..............................End Of Responsive.....................................*/
+
+
+/*==================End Of Default Layout=======================*/

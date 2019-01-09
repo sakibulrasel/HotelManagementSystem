@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 14, 2018 8:42:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Reservation" table="reservation" catalog="hotel" optimistic-lock="version">
+        <id name="idreservation" type="java.lang.Integer">
+            <column name="idreservation" />
+            <generator class="identity" />
+        </id>
+        <property name="roomNo" type="string">
+            <column name="Room_No" length="45" not-null="true" />
+        </property>
+        <property name="roomType" type="string">
+            <column name="Room_Type" length="45" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="Name" length="45" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" length="45" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" length="45" not-null="true" />
+        </property>
+        <property name="sex" type="string">
+            <column name="Sex" length="45" not-null="true" />
+        </property>
+        <property name="age" type="int">
+            <column name="Age" not-null="true" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="Mobile" length="45" not-null="true" />
+        </property>
+        <property name="arrival" type="date">
+            <column name="Arrival" length="10" not-null="true" />
+        </property>
+        <property name="departure" type="date">
+            <column name="Departure" length="10" not-null="true" />
+        </property>
+        <property name="charges" type="double">
+            <column name="Charges" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="advance" type="double">
+            <column name="Advance" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="days" type="int">
+            <column name="Days" not-null="true" />
+        </property>
+        <property name="total" type="double">
+            <column name="Total" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="due" type="double">
+            <column name="Due" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

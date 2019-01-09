@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition template="../resources/adminpage.xhtml">
+       <ui:define name="title">Forum :: Admin</ui:define>
+        
+       <ui:define name="aside">
+           
+           <h1> <a href="#{request.getContextPath()}/"> <img src="#{request.getContextPath()}/resources/img/forum.png" class="logo"/> </a></h1> 
+           <br/>
+           <ul class="asideMenu">
+               
+                <li> <a href="#{request.getContextPath()}/admin/welcome.xhtml" class="active"> <i class="fa fa-user"></i> #{sessionScope.uname} </a> </li>
+                <li> <a href="#{request.getContextPath()}/admin/users.xhtml"> <i class="fa fa-users"></i> Create Users </a> </li>                
+               
+               <li> <a href="#{request.getContextPath()}/admin/newpost.xhtml"> <i class="fa fa-plus"></i>  Add Room </a> </li>
+               <li> <a href="#{request.getContextPath()}/admin/addfood.xhtml"> <i class="fa fa-plus"></i>  Add Food </a> </li>
+               <li> <a href="#{request.getContextPath()}/admin/customer.xhtml"> <i class="fa fa-archive"></i>  Customer Details </a> </li>
+               <li><a href="#{request.getContextPath()}/admin/availableroom.xhtml"> <i class="fa fa-angellist"></i>  Available Room </a> </li>
+               <li><a href="#{request.getContextPath()}/admin/searchcustomer.xhtml"> <i class="fa fa-search"></i>  Search Customer </a> </li>
+              <li><a href="#{request.getContextPath()}/admin/sbdate.xhtml"> <i class="fa fa-search"></i>  Search Customer Between Date </a> </li>
+               <li> <h:form>                   
+                <h:commandLink action="#{loginMB.logout()}"> <i class="fa fa-sign-out"></i> Logout</h:commandLink>            
+               </h:form> </li>              
+            </ul>
+
+       </ui:define>
+       
+       
+        <ui:define name="content">  
+            <h2>Welcome #{sessionScope.uname} !</h2><hr class="admin"/><br/>
+            
+            <h:form>
+                
+                <p:messages id="msg" closable="true" autoUpdate="true"></p:messages>
+                
+                <h:panelGrid columns="2">  
+                    
+                   
+                    <h:outputLabel>Username </h:outputLabel>
+                    <h:inputText value="#{userMB.user.uname}" label="Username" required="true" requiredMessage="Username can't be empty" />
+
+                    <h:outputLabel>Password </h:outputLabel>
+                    <h:inputSecret value="#{userMB.user.pass}" label="Password" required="true" requiredMessage="Password can't be empty" />
+                    
+                    <h:outputLabel>User Role</h:outputLabel>
+                    <h:inputText value="#{userMB.user.role}" label="Role" required="true" requiredMessage="Role Field Cannot be Empty"/>
+                    <h:outputText></h:outputText>
+                    <p:commandButton action="#{userMB.add_user()}" value="Add User" update="msg"/>
+                </h:panelGrid>
+
+            </h:form> 
+             
+            <br/><br/>
+            
+
+         </ui:define>               
+             
+   </ui:composition>
+</html>
+

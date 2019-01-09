@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+   <ui:composition template="./resources/loginpage.xhtml">
+       <ui:define name="content">
+           <br/><br/>
+           
+           <div class="bgwhite" id="registration">
+               <div class="asideTitle">Login</div>
+
+            <h:form>
+                
+                <p:messages id="msg" closable="true"></p:messages>
+                <h:panelGrid columns="2">  
+                   
+                    <h:outputLabel>Username </h:outputLabel>
+                    <h:inputText value="#{loginMB.users.UUsername}" label="Username" required="true" />
+
+                    <h:outputLabel>Password </h:outputLabel>
+                    <h:inputText value="#{loginMB.users.UPass}" label="Password" required="true" />
+
+                    <h:outputText></h:outputText>
+                    <p:commandButton action="#{loginMB.login()}" value="Login" update="msg"/>
+                </h:panelGrid>
+
+            </h:form>              
+           
+           </div>
+           <br /><br /><br />
+           
+       </ui:define>
+       
+   </ui:composition> 
+</html>
+

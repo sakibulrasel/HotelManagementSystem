@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 14, 2018 8:42:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.User" table="user" catalog="hotel" optimistic-lock="version">
+        <id name="iduser" type="java.lang.Integer">
+            <column name="iduser" />
+            <generator class="identity" />
+        </id>
+        <property name="uname" type="string">
+            <column name="uname" length="45" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="45" not-null="true" />
+        </property>
+        <property name="role" type="string">
+            <column name="role" length="45" not-null="true" />
+        </property>
+        <property name="fullname" type="string">
+            <column name="fullname" length="45" not-null="true" />
+        </property>
+        <property name="UEmail" type="string">
+            <column name="u_email" length="45" not-null="true" />
+        </property>
+        <property name="URegDate" type="date">
+            <column name="u_regDate" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

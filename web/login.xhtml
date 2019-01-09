@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+   <ui:composition template="./resources/loginpage.xhtml">
+       <ui:define name="title">MyBlog :: Login</ui:define>
+       
+       <ui:define name="content">
+           <br/><br/>
+           
+           <div class="bgwhite" id="registration">
+               <div class="asideTitle">Login</div>
+               
+               <c:set var="url" value="#{request.getRequestURL()}"></c:set>
+               
+<!--               <c:set value=".xhtml" var="t"></c:set>-->
+               
+               <c:set var="referer" value="#{header.referer}.xhtml"></c:set>
+               
+               
+               <c:if test="#{referer ne url}">                   
+                   <c:set var="redirect" scope="session" value="#{header.referer}"></c:set>                   
+               </c:if>
+               
+            <h:form>
+                
+                <p:messages id="msg" closable="true" autoUpdate="true"></p:messages>
+                
+                <h:panelGrid columns="2">  
+                    
+                   
+                    <h:outputLabel>Username </h:outputLabel>
+                    <h:inputText value="#{loginMB.user.uname}" label="Username" required="true" requiredMessage="Username can't be empty" />
+
+                    <h:outputLabel>Password </h:outputLabel>
+                    <h:inputSecret value="#{loginMB.user.pass}" label="Password" required="true" requiredMessage="Password can't be empty" />
+
+                    <h:outputText></h:outputText>
+                    <p:commandButton action="#{loginMB.login()}" value="Login" update="msg"/>
+                </h:panelGrid>
+
+            </h:form>              
+           
+           </div>
+           <br /><br /><br />
+           
+       </ui:define>
+       
+   </ui:composition> 
+</html>
+

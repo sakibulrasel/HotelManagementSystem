@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+   <ui:composition template="./resources/homepage.xhtml">
+       <ui:define name="title">MyBlog:: #{displayRoomMB.getSinglePost().get(0).postTitle}</ui:define>
+       <ui:define name="content">
+           <div class="asideTitle">
+               &nbsp;
+           </div>
+           
+           
+           <h:form id="fff">   
+               
+               <c:forEach items="#{displayRoomMB.getSinglePost()}" var="p">                   
+<!--                   <h2>#{p.roomNo} </h2>
+                   <p class="info">
+                       <a href="#{request.getContextPath()}/userinfo/#{p.id}/#{p.roomType}"> <i class="fa fa-user"></i> #{p.users.UUsername} </a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-clock-o"></i> #{p.postDate} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#{request.getContextPath()}/category/#{p.category.catId}/#{p.category.catName}"> <i class="fa fa-bars"></i> #{p.category.catName}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#{request.getContextPath()}/details/#{p.postId}/#{displayPostMB.urlEncode(p.postTitle)}"> <i class="fa fa-comments"></i> #{p.commentses.size()} comments </a>               
+                    </p>-->
+
+                    <h:outputText value="#{p.description}" escape="false"></h:outputText>  <br />
+
+                    
+                    
+                    <br /><br />
+                    
+                    
+                    <span class="clear"></span><hr/>
+                    <strong>All comments on this post</strong>
+                    <hr/>
+                    
+                    
+                   
+<!--                    <c:forEach items="#{displayPostMB.getAllComments(p.postId)}" var="comments">
+                        <div class="comment">
+                            <strong>#{comments.users.UUsername} : </strong>
+                            #{comments.commentContent}<br/>                        
+                        </div>                        
+                    </c:forEach>-->
+                    
+                    <br />
+                  
+                    <c:if test="${not empty sessionScope['uname']}">
+<!--                       <p:messages id="msg" closable="true"></p:messages>-->
+                        <p:growl id="msg" showDetail="true" />  
+                        <h:outputLabel value="Add a comment (#{sessionScope.uname})" /><br/>
+                        <h:inputTextarea value="#{commentsMB.comments.commentContent}" styleClass="comment" required="true" requiredMessage="comment can't be empty" label="comment"/><br/>
+                            
+                        <p:commandButton styleClass="readmore" action="#{commentsMB.addComments(sessionScope.uid, p.postId)}" value="Comment" update=":fff"/>
+                       
+                        
+                    </c:if>
+
+                    <c:if test="${empty sessionScope['uname']}">
+                        <a href="#{request.getContextPath()}/login">Login to comment</a>
+                    </c:if> 
+                    
+                </c:forEach>
+                   
+               
+               
+            </h:form> 
+           
+           
+          
+       </ui:define>
+       
+   </ui:composition> 
+</html>
+

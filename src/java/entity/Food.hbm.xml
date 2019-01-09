@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 14, 2018 8:42:03 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Food" table="food" catalog="hotel" optimistic-lock="version">
+        <id name="idfood" type="java.lang.Integer">
+            <column name="idfood" />
+            <generator class="identity" />
+        </id>
+        <property name="fooId" type="string">
+            <column name="foo_id" length="45" not-null="true" />
+        </property>
+        <property name="FName" type="string">
+            <column name="f_name" length="45" not-null="true" />
+        </property>
+        <property name="FPrice" type="double">
+            <column name="f_price" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="FNetprice" type="double">
+            <column name="f_netprice" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="qty" type="int">
+            <column name="qty" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true" />
+        </property>
+        <property name="FUrl" type="string">
+            <column name="f_url" length="200" not-null="true" />
+        </property>
+        <property name="discount" type="double">
+            <column name="discount" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

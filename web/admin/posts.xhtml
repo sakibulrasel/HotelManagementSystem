@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../resources/adminpage.xhtml">
+        <ui:define name="title">MyBlog :: Admin</ui:define>
+
+        <ui:define name="aside">
+
+            <h1> <a href="#{request.getContextPath()}/"> <img src="#{request.getContextPath()}/resources/img/forum.png" class="logo"/> </a></h1> 
+            <br/>
+            <ul class="asideMenu">
+
+              <li> <a href="#{request.getContextPath()}/admin/welcome.xhtml" class="active"> <i class="fa fa-user"></i> #{sessionScope.uname} </a> </li>
+                <li> <a href="#{request.getContextPath()}/admin/users.xhtml"> <i class="fa fa-users"></i> Create Users </a> </li>                
+               
+               <li> <a href="#{request.getContextPath()}/admin/newpost.xhtml"> <i class="fa fa-plus"></i>  Add Room </a> </li>
+               <li> <a href="#{request.getContextPath()}/admin/addfood.xhtml"> <i class="fa fa-plus"></i>  Add Food </a> </li>
+               <li> <a href="#{request.getContextPath()}/admin/customer.xhtml"> <i class="fa fa-archive"></i>  Customer Details </a> </li>
+               <li><a href="#{request.getContextPath()}/admin/availableroom.xhtml"> <i class="fa fa-angellist"></i>  Available Room </a> </li>
+               <li><a href="#{request.getContextPath()}/admin/searchcustomer.xhtml"> <i class="fa fa-search"></i>  Search Customer </a> </li>
+              <li><a href="#{request.getContextPath()}/admin/sbdate.xhtml"> <i class="fa fa-search"></i>  Search Customer Between Date </a> </li>
+               <li> <h:form>                   
+                    <h:commandLink action="#{loginMB.logout()}"> <i class="fa fa-sign-out"></i> Logout</h:commandLink>            
+                </h:form> </li>              
+            </ul>
+
+        </ui:define>
+
+
+        <ui:define name="content">  
+            <h2>All Posts (Page- #{displayPostMB.nextPageNumber()}) </h2><hr class="admin"/><br/><br/>
+            <p:outputPanel id="whole">
+
+                <h:form id="form">
+                    <p:growl />
+                    <p:commandButton value="Add Room" type="button" onclick="PF('newDialog').show();" title="new" />
+                    <br/><br/>
+
+
+
+                    <table class="nice">
+                        <tbody>
+
+                            <tr> 
+                                <th>Post Id</th>
+                                <th>Post Title</th>
+                                <th>Post User</th>
+                                <th>Time</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        <c:forEach items="#{displayPostMB.allPosts1}" var="posts">
+                            <tr> 
+                                <td>#{posts.postId}</td>
+                                <td>#{posts.postTitle}</td>
+                                <td>#{posts.users.UUsername}</td>
+                                <td>#{posts.postDate}</td>
+                                <td> 
+                            <p:commandLink update=":whole" oncomplete="PF('carDialog').show()" title="Edit">
+                                <i class="fa fa-pencil-square-o"></i>
+                                <f:setPropertyActionListener value="#{posts}" target="#{postsMB.sellectedPost}" />
+                            </p:commandLink>
+                            </td>
+
+                            <td> 
+                            <p:commandLink update=":whole" oncomplete="PF('deleteDialog').show()" title="Delete">
+                                <i class="fa fa-times"></i>
+                                <f:setPropertyActionListener value="#{posts}" target="#{postsMB.sellectedPost}" />
+                            </p:commandLink>
+                            </td>
+                            </tr>
+
+                        </c:forEach>
+
+
+                        </tbody>
+                    </table>
+                    
+                    <br/>
+                    <c:if test="#{displayPostMB.nextPageNumber() gt 1}">
+                     <a href="#{request.getContextPath()}/admin/posts/#{displayPostMB.nextPageNumber()-2}" disabled="true" class="btnNormal"><i class="fa fa-backward"></i> Previous</a>
+                    </c:if>
+
+                    <c:if test="#{not empty displayPostMB.allPosts and displayPostMB.allPosts.size() gt 4}">  
+                     <a href="#{request.getContextPath()}/admin/posts/#{displayPostMB.nextPageNumber()}" disabled="true" class="btnNormal">Next <i class="fa fa-forward"></i> </a>
+                    </c:if>
+                    
+                    
+                    <br/><br/><br/><br/><br/>
+
+
+
+
+
+
+                </h:form>
+                <!--New cat Dialogue-->
+                <p:dialog header="New Post" widgetVar="newDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">        
+                    <h:form>    
+                       <h:panelGrid columns="2">  
+                    
+                    <h:outputLabel value="Select Category"></h:outputLabel>
+                    <p:selectOneMenu value="#{postsMB.catName}">
+                        <f:selectItem itemLabel="--Select One--" itemValue=""></f:selectItem>
+                        <f:selectItems value="#{postsMB.categoryName}">
+                        </f:selectItems>                    
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel>Post Title </h:outputLabel>
+                    <p:inputText value="#{postsMB.posts.postTitle}" label="Post Title" required="true" requiredMessage="Post title can't be empty" />
+                    
+                    <h:outputLabel>Content</h:outputLabel>
+                    <p:editor value="#{postsMB.posts.postContent}" required="true" requiredMessage="Please write some content"/>
+                    
+                   
+                    <h:outputText></h:outputText>
+                    <p:commandButton action="#{postsMB.addPost(sessionScope.uid)}" value="Post Now" update=":whole" />
+                </h:panelGrid>                 
+
+                    </h:form>
+                </p:dialog>
+
+                <!--Edit cat Dialogue-->  
+                <p:dialog header="Edit Post" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <h:form>
+
+                        <h:outputLabel>Post Title </h:outputLabel><br/>
+                        <h:inputText value="#{postsMB.sellectedPost.postTitle}" required="true"  requiredMessage="Please Enter Post Title"/><br/>
+                        <h:outputLabel>Post Content </h:outputLabel><br/>
+                        
+                        <p:editor value="#{postsMB.sellectedPost.postContent}" />
+
+                        <p:commandButton action="#{postsMB.updatePost()}" value="Update" update=":whole"/>
+
+                    </h:form>
+
+                </p:dialog>  
+
+
+                <!--Edit cat Dialogue-->     
+                <p:dialog header="Are you sure?" widgetVar="deleteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+                    <h:form>
+
+                        <h:outputLabel>You are going to delete #{postsMB.sellectedPost.postTitle} </h:outputLabel><br/>
+
+                        <p:commandButton action="#{postsMB.deletePost()}" value="OK" update=":whole"/>
+
+                    </h:form>
+
+
+                </p:dialog>
+
+
+
+            </p:outputPanel>   
+
+        </ui:define>               
+
+    </ui:composition> 
+</html>
+

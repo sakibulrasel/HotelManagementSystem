@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../resources/adminpage.xhtml">
+        <ui:define name="title">Add New Post</ui:define>
+
+        <ui:define name="aside">
+
+            <h1> <a href="#{request.getContextPath()}/"> <img src="#{request.getContextPath()}/resources/img/forum.png" class="logo"/> </a></h1> 
+            <br/><br/><br/>
+            <ul class="asideMenu">     
+                <li> <a href="#{request.getContextPath()}/roommanager/welcome.xhtml" class="active"> <i class="fa fa-user"></i>  #{sessionScope.uname} </a> </li>
+                <li> <a href="#{request.getContextPath()}/roommanager/customer.xhtml"> <i class="fa fa-archive"></i>  Customer Details </a> </li>
+                <li><a href="#{request.getContextPath()}/roommanager/availableroom.xhtml"> <i class="fa fa-angellist"></i>  Available Room </a> </li>
+                <li><a href="#{request.getContextPath()}/roommanager/searchcustomer.xhtml"> <i class="fa fa-search"></i>  Search Customer </a> </li>
+                <li><a href="#{request.getContextPath()}/roommanager/sbdate.xhtml"> <i class="fa fa-search"></i>  Search Customer Between Date </a> </li>
+                <li> 
+                <h:form>                   
+                    <h:commandLink action="#{loginMB.logout()}"> <i class="fa fa-sign-out"></i> Logout</h:commandLink>            
+                </h:form>
+                </li> 
+
+            </ul>
+
+        </ui:define>
+
+
+        <ui:define name="content">  
+            <div class="asideTitle">
+                Search Customer (Page-#{displayRoomMB.nextPageNumber()})
+            </div>
+            <br/><br/>
+
+
+
+            <h:form>
+                <h:panelGrid columns="1">
+                    <h:outputLabel value="&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Search By Date"/>
+
+                    <p:calendar id="mask" value="#{customerBean.dt}" pattern="dd-MM-yyyy" mask="true" />
+                    <h:commandButton value="Search" />
+
+                </h:panelGrid>
+            </h:form>
+            
+            <h:form>
+                <c:forEach items="#{customerBean.customerDetailsBydt}" var="p">                   
+                   <h2>
+                    #{p.name}                   
+                   </h2>
+            <p class="info">
+                 #{p.address}  
+                               
+            </p>
+            
+                  
+           
+            </c:forEach> 
+            </h:form>
+
+
+
+
+
+
+            <h:form>
+
+
+
+
+
+            </h:form> 
+
+            <br/><br/>
+
+        </ui:define>               
+
+    </ui:composition> 
+</html>
+

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+   <ui:composition template="./resources/homepage.xhtml">
+       
+       <ui:define name="title">MyBlog</ui:define>
+       <ui:define name="menu">
+           <li> <a href="#{request.getContextPath()}/" class="active"> Home</a>  </li>
+            <li> <a href="#{request.getContextPath()}/about.xhtml"> Room Corner</a>  </li>
+            <li> <a href="#{request.getContextPath()}/foods.xhtml"> Food Corner</a>  </li>
+       </ui:define>
+        
+       <ui:define name="content">
+           <div class="asideTitle">
+               Available Room (Page-#{displayRoomMB.nextPageNumber()})
+           </div>
+           
+           
+           <h:form>
+               
+               
+               <p:dataGrid var="hm" value="#{displayRoomMB.allPosts}" columns="3" rows="10" paginator="true" id="p" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="6,12,16">
+                <f:facet name="header">
+                    <h:outputLabel value="Available Rooms"/>
+                    
+                </f:facet>
+                   <p:panel header="#{hm.roomNo}">
+                    <h:panelGrid columns="1">
+                        <p:graphicImage name="#{hm.RUrl}" library="images" width="200" height="230"/>
+                        <h:outputText value="#{hm.description}"/>
+                        <h:outputText value="#{hm.price}"/>
+                    </h:panelGrid>
+                    
+                </p:panel>
+              </p:dataGrid>
+               
+               
+        </h:form> 
+           <br/>
+<!--           <c:if test="#{displayRoomMB.nextPageNumber() gt 1}">
+               <a href="#{request.getContextPath()}/next/#{displayRoomMB.nextPageNumber()-2}" disabled="true" class="btnNormal"><i class="fa fa-backward"></i> Previous</a>
+           </c:if>
+           
+           <c:if test="#{not empty displayRoomMB.allPosts and displayPostMB.allPosts.size() gt 4}">  
+               <a href="#{request.getContextPath()}/next/#{displayRoomMB.nextPageNumber()}" disabled="true" class="btnNormal">Next <i class="fa fa-forward"></i> </a>
+           </c:if>-->
+           
+       </ui:define>
+       
+   </ui:composition>
+</html>
+

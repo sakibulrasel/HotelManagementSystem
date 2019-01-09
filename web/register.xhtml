@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./resources/loginpage.xhtml">
+        <ui:define name="title">Forum :: Register</ui:define>
+        <ui:define name="content">
+            <br/><br/>
+
+            <div class="bgwhite" id="registration">
+                <div class="asideTitle">Register a new account</div>
+
+                <h:form>
+                    
+
+                    <p:messages id="msg" closable="true" autoUpdate="true"></p:messages>
+                    <h:panelGrid columns="2">  
+                        <h:outputLabel value="Select Room"></h:outputLabel>
+                        <p:selectOneMenu value="#{roomMB.reservation.roomNo}">
+                            <f:selectItem itemLabel="Select Room" itemValue=""/>
+                            <f:selectItems value="#{roomMB.roomName}"/>
+                            <p:ajax event="itemSelect" update="typeof"/>
+
+                        </p:selectOneMenu>
+
+                        
+                        <h:outputLabel value="Room Type"></h:outputLabel>
+                        <h:inputText id="typeof" value="#{roomMB.roomtype}"/>
+
+
+                        <h:outputLabel>Full Name </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.name}" required="true" requiredMessage="Full Name required" />
+                        <p:outputLabel  value="Sex" />
+                        <p:selectOneRadio id="console" value="#{roomMB.reservation.sex}">
+                            <f:selectItem itemLabel="male" itemValue="Male" />
+                            <f:selectItem itemLabel="female" itemValue="Female" />
+
+                        </p:selectOneRadio>
+
+                        <h:outputLabel>Address </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.address}" required="true" requiredMessage="Username required" />
+
+                        <p:outputLabel  value="City" />
+                        <p:selectOneMenu  value="#{roomMB.reservation.city}" style="width:125px">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Dhaka" itemValue="Dhaka" />
+                            <f:selectItem itemLabel="Khulna" itemValue="Khulna" />
+                            <f:selectItem itemLabel="Barishal" itemValue="Barishal" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel>Age </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.age}" required="true" requiredMessage="Username required" />
+
+                        <h:outputLabel>Mobile </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.mobile}" required="true" requiredMessage="Username required" />
+
+                        <p:outputLabel for="effect" value="Arrival" />
+                        <p:calendar id="effect" value="#{roomMB.reservation.arrival}" effect="fold" />
+                        
+                        <p:outputLabel for="effect" value="Departure" />
+                        <p:calendar id="effect1" value="#{roomMB.reservation.departure}" effect="fold" />
+
+                        <h:outputLabel>Number of Days </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.days}" required="true" requiredMessage="Username required" />
+
+                        <h:outputLabel>Charges Per Day </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.charges}" required="true" requiredMessage="Username required" />
+
+                        <h:outputLabel>Advance </h:outputLabel>
+                        <h:inputText value="#{roomMB.reservation.advance}" required="true" requiredMessage="Username required" />
+
+                        
+                        <h:outputText></h:outputText>
+                        <p:commandButton action="#{roomMB.book_room()}" value="Register" update="msg"/>
+                    </h:panelGrid>
+
+                </h:form>              
+
+            </div>
+            <br /><br /><br />
+
+        </ui:define>
+
+    </ui:composition> 
+</html>
+
